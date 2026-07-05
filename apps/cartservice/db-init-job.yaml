@@ -1,0 +1,18 @@
+# Drill 5: copy this file into apps/cartservice/ and add it to that kustomization.yaml
+# To make it FAIL on purpose (to see the sync block): change 'exit 0' to 'exit 1'
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-init
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: migrate
+          image: busybox:1.36
+          command: ["sh", "-c", "echo 'simulating db migration...'; sleep 10; exit 0"]
