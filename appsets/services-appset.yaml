@@ -23,6 +23,6 @@ spec:
         server: https://kubernetes.default.svc
         namespace: boutique
       syncPolicy:
-        automated: {}          # Drill 3 & 4: change to {prune: true, selfHeal: true} AFTER all green
+        automated: {prune: true, selfHeal: true}          # Drill 3 & 4: change to {prune: true, selfHeal: true} AFTER all green
         syncOptions:
           - CreateNamespace=true
