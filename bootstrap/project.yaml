@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: boutique
+  namespace: argocd
+spec:
+  description: Online Boutique practice project
+  sourceRepos:
+    - https://github.com/yogesh53/boutique-gitops
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: boutique
+    - server: https://kubernetes.default.svc
+      namespace: argocd
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  # Drill 7: uncomment, replace password, then test read-only access
+  # roles:
+  #   - name: dev-readonly
+  #     description: Devs can view, never sync or delete
+  #     policies:
+  #       - p, proj:boutique:dev-readonly, applications, get, boutique/*, allow

@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: boutique-services
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/yogesh53/boutique-gitops
+        revision: main
+        directories:
+          - path: apps/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: boutique
+      source:
+        repoURL: https://github.com/yogesh53/boutique-gitops
+        targetRevision: main
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: boutique
+      syncPolicy:
+        automated: {}          # Drill 3 & 4: change to {prune: true, selfHeal: true} AFTER all green
+        syncOptions:
+          - CreateNamespace=true

@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: redis
+  namespace: argocd
+spec:
+  project: boutique
+  source:
+    repoURL: https://github.com/yogesh53/boutique-gitops
+    targetRevision: main
+    path: infra/redis
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: boutique
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
