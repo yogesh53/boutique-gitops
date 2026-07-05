@@ -16,8 +16,8 @@ spec:
     - group: ""
       kind: Namespace
   # Drill 7: uncomment, replace password, then test read-only access
-  # roles:
-  #   - name: dev-readonly
-  #     description: Devs can view, never sync or delete
-  #     policies:
-  #       - p, proj:boutique:dev-readonly, applications, get, boutique/*, allow
+  roles:
+    - name: dev-readonly
+      description: Devs can view, never sync or delete
+      policies:
+        - p, proj:boutique:dev-readonly, applications, get, boutique/*, allow
