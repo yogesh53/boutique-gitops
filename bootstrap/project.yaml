@@ -21,3 +21,7 @@ spec:
       description: Devs can view, never sync or delete
       policies:
         - p, proj:boutique:dev-readonly, applications, get, boutique/*, allow
+    - name: qa-readonly
+      description: QA can view, never sync or delete
+      policies:
+        - p, proj:boutique:qa-readonly, applications, get, boutique/*, allow
