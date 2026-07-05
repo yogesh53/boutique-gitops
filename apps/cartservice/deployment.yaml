@@ -35,8 +35,6 @@ spec:
         env:
         - name: REDIS_ADDR
           value: redis-cart:6379
-        - name: MIGRATION_DRILL
-          value: "1"
         resources:
           requests:
             cpu: 200m
